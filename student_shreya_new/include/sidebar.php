@@ -5,33 +5,29 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="teacherdashboard.php">
+                <a class="nav-link active" href="studentdashboard.php">
                   <span data-feather="home"></span>
                   Dashboard <span class="sr-only">(current)</span>
                 </a>
               </li>
+              
+              
               <li class="nav-item">
-                <a class="nav-link" href="teacher.php">
+                <a class="nav-link" href="student.php">
                   <span data-feather="users"></span>
-                  Intership Giver's Details
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="allinternships.php">
-                  <span data-feather="bar-chart-2"></span>
-                  Intership posted details
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="students_applied.php">
-                  <span data-feather="users"></span>
-                  Students Applied
+                  Student Details
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   <span data-feather="users"></span>
-                  Students Confirmed
+                  Points Completed
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="internship_applied.php">
+                  <span data-feather="bar-chart-2"></span>
+                  Intenships/Jobs Applied
                 </a>
               </li>
               
