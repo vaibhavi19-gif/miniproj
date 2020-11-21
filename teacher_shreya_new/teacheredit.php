@@ -40,7 +40,7 @@ include('config.php');
           </div>
 
              <div>
-                <form action="cedit.php" method="POST">
+                <form action="tedit.php" method="POST">
                        
                 <div class="form-group">
                        <label for="fname"></label>
@@ -85,7 +85,7 @@ include('config.php');
                      <div class="form-group">
                        <label for="pno"></label>
                        <input type="number" name="pno" value="<?php echo $pno ?>" class="form-control" placeholder="Enter First name">
-                     </div>\
+                     </div>
 
                      <div class="form-group">
                        <label for="position"></label>

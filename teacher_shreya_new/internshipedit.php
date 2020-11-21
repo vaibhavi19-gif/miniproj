@@ -2,7 +2,7 @@
     
 
 <?php include('include/sidebar.php');  
-include('../config.php');
+include('config.php');
 $id=$_GET['edit'];
 $query = mysqli_query($conn, "select * from all_internships where id = '$id'");
 while($row=mysqli_fetch_array($query)){

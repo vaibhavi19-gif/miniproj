@@ -24,28 +24,37 @@
           </div>
 
              <div>
+             <?php 
+                     include("config.php");
+                     $user = $_SESSION['username'];
+                     $query1 = mysqli_query($conn,"select email_id, branch from teachers_signin where username = '$user'");
+                     $det = mysqli_fetch_array($query1);
+                     $em = $det['email_id'];
+                     $br = $det['branch'];
+                     ?>
                 <form action="addintern.php" method="POST">
                      <div class="form-group">
-                       <label for="email_id"></label>
-                       <input type="email" name="email_id" class="form-control" placeholder="Enter EmailId">
+                       <label for="email_id">Email ID:</label>
+                       <input type="email" name="email_id" class="form-control" placeholder="Enter Email Id" value="<?php echo $em;?>" disabled>
+                     </div>
+                     
+                     <div class="form-group">
+                       <label for="internship_title">Intenship Title:</label>
+                       <input type="text" name="internship_title" class="form-control" placeholder="Enter Internship Title">
                      </div>
                      <div class="form-group">
-                       <label for="internship_title"></label>
-                       <input type="text" name="internship_title" class="form-control" placeholder="Enter internship_title">
-                     </div>
-                     <div class="form-group">
-                       <label for="des"></label>
-                       <input type="text" name="des" class="form-control" placeholder="Enter des">
+                       <label for="des">Description:</label>
+                       <input type="text" name="des" class="form-control" placeholder="Enter description">
                      </div>
 
                       <div class="form-group">
-                       <label for="branch"></label>
-                       <input type="text" name="branch" class="form-control" placeholder="Enter branch">
+                       <label for="branch">Branch:</label>
+                       <input type="text" name="branch" class="form-control" placeholder="Enter branch" value="<?php echo $br;?>" disabled>
                      </div>
 
                      <div class="form-group">
-                       <label for="apply_date"></label>
-                       <input type="date" name="apply_date" class="form-control" placeholder="Enter branch">
+                       <label for="apply_date">Last Application Date:</label>
+                       <input type="date" name="apply_date" class="form-control" placeholder="Enter Apply Date">
                      </div>
 
                      <div class="form-group">

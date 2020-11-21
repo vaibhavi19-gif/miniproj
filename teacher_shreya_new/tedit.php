@@ -25,13 +25,13 @@ if(isset($_POST['submit'])){
    
 
     $query = mysqli_query($conn, "update teachers_signin set fname='$fname',lname='$lname',username='$username', userpass='$password', branch='$branch', faculty_num='$faculty_num', dob='$dob', email_id='$email' , pno='$pno' , working_addr='$working_addr', position='$position' where email_id='$id'");
-
-    if($query){
-        echo "<script>alert('Record Updated')</script>";
-        header("Location: customer.php");
+    $query2 = mysqli_query($conn, "UPDATE all_internships SET email_id='$email' ,branch = '$branch' WHERE  email_id='$id'");
+    if($query && $query2){
+        echo "<script>alert('Record Updated');</script>";
+        header("Location: teacher.php");
        
     }else{
-        echo "<script>alert('Try again')</script>";
+        echo "<script>alert('Try again');</script>";
        
     }
 }

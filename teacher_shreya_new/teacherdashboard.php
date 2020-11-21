@@ -21,31 +21,39 @@
           <?php 
             $user = $_SESSION['username'];
             include("config.php");
-            $query = mysqli_query($conn, "select * from all_internships");
+            $query1 = mysqli_query($conn, "select email_id from teachers_signin where username = '$user'");
+            $email = mysqli_fetch_array($query1);
+            $em = $email['email_id'];
+            $query = mysqli_query($conn, "select * from all_internships where email_id='$em'");
               while($row = mysqli_fetch_array($query)){
-            
+                if($row>0){
+
+                
+        
           ?>
-          <div class="continer py-5">
-            <div class="row mt-4">
-              <div class="col-md-3">
+                     
+          <div class="col-md-4 mt-4">
                 <div class="card">
                   <div class="card-body">
                     <h2 class="card-title"><?php  echo $row['internship_title'];  ?></h2>
                     <p class="card-text">
-                      <td><?php  echo $row['des'];  echo "<br>";?></td>
-                      <?php  echo $row['email_id'];  echo "<br>";?>
-                      <td><?php  echo $row['branch'];  echo "<br>";?></td>
-                      <td><?php  echo $row['apply_date'];  ?></td>
+                      <td>Description:<?php  echo $row['des'];  echo "<br>";?></td>
+                      Email id:<?php  echo $row['email_id'];  echo "<br>";?>
+                      <td>From:<?php  echo $row['branch'];  echo "<br>";?></td>
+                      <td>Last Date:<?php  echo $row['apply_date'];  ?></td>
                     </p>
-                    <a onClick="return confirm('Please confirm application');" class="btn btn-primary">APPLY NOW!</a>
+                    <a class="btn btn-primary" href="students_applied.php">CHECK APPLICANTS</a>
                   </div>
                 </div>
               </div>
-            </div>
+           
+            
             <?php
+            }
               }
             ?>
-          </div>
+              
+            </div>
           </main>
           <!--<canvas class="my-4" id="myChart" width="900" height="380"></canvas>
 

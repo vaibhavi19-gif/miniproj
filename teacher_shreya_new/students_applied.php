@@ -8,64 +8,70 @@
         <nav aria-label="breadcrumb">
                  <ol class="breadcrumb">
                  <li class="breadcrumb-item"><a href="admindashboard.php">Dashboard</a></li>
-                 <li class="breadcrumb-item"><a href="#"></a>All Internships</li>
+                 <li class="breadcrumb-item"><a href="#"></a>Students Applied</li>
                  </ol>
                </nav>
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                
-          <h1 class="h2">Job Givers</h1>
+          <h1 class="h2">Accept/Reject the applicants</h1>
 
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
                 
               </div>
-              <a href="add_internship.php" class="btn btn-primary">ADD INTERNSHIP</a>
             </div>
           </div>
-
-          <table id="example" class="display" style="width:100%">
+          
+    <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
-                <th>No.</th>
-                <th>Email_Id</th>
+            <th>No.</th>
+                <th>Applicant Email Id</th>
                 <th>Internship Title</th>
                 <th>Internship Description</th>
-                <th>Branch</th>
-                <th>Apply Date</th>
-                <th>Action</th>
+                <th>Branch From</th>
+                <th>Current Semester</th>
+                <th>Applied Date</th>
+                <th>Resume</th>
+                <th>Accept/Reject</th>
 
                 
             </tr>
         </thead>
+        
         <tbody>
         <?php 
             $user = $_SESSION['username'];
-            
             include("config.php");
-            $query1 = mysqli_query($conn, "select email_id from teachers_signin where username = '$user'");
-            $email = mysqli_fetch_array($query1);
+            $query2 = mysqli_query($conn, "select email_id from teachers_signin where username = '$user'");
+            $email = mysqli_fetch_array($query2);
             $em = $email['email_id'];
-            $query = mysqli_query($conn, "select * from all_internships where email_id ='$em'");
-              while($row = mysqli_fetch_array($query)){    
-                if($row>0){       
-        ?>
+            $query = mysqli_query($conn, "SELECT * FROM internship_apply INNER JOIN all_internships ON internship_apply.int_id=all_internships.id WHERE all_internships.email_id = '$em'");
+              while($row = mysqli_fetch_assoc($query)){
+                  $app_em = $row['applicant_email'];
+                  $query3 = mysqli_query($conn, "SELECT * FROM signin_data WHERE email = '$app_em'");
+                  $stud_det = mysqli_fetch_array($query3);
             
+          ?>    
               <tr>
                  <td><?php  echo $row['id'];  ?></td>
                 
-                 <td><?php  echo $row['email_id'];  ?></td>
+                 <td><?php  echo $row['applicant_email'];  ?></td>
                  
                  <td><?php  echo $row['internship_title'];  ?></td>
                  <td><?php  echo $row['des'];  ?></td>
-                 <td><?php  echo $row['branch'];  ?></td>
-                 <td><?php  echo $row['apply_date'];  ?></td>
+                 <td><?php  echo $stud_det['branch'];  ?></td>
+                 <td><?php  echo $row['sem'];  ?></td>
+                 <td><?php  echo $row['date_applied'];  ?></td>
+                 <td><?php  echo $row['file'];?></td>
+                 
 
                  <td>
                     <div class="row">
                     <div class="btn-group">
                       
-                      <a onClick="return confirm('Please confirm edition');" href="internshipedit.php?edit=<?php echo $row['id']; ?>" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span></a>
-                      <a onClick="return confirm('Please confirm deletion');" href="internshipdelete.php?del=<?php echo $row['id']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                      <!--<a onClick="return confirm('Please confirm edition');" href="internshipedit.php?edit=<?php echo $row['id']; ?>" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span></a>-->
+                      <a onClick="return confirm('Please confirm accepting the selected student for this internship...');" href="" class="btn btn-primary">ACCEPT</a>
 
                     </div>
 
@@ -76,20 +82,23 @@
                  </td>
                  
               </tr>
-            <?php   } } ?>
+            <?php   }  ?>
         </tbody>
         <tfoot>
             <tr>
             <th>No.</th>
-                <th>Email_Id</th>
+                <th>Applicant Email Id</th>
                 <th>Internship Title</th>
                 <th>Internship Description</th>
-                <th>Branch</th>
-                <th>Apply Date</th>
-                <th>Action</th>
+                <th>Branch From</th>
+                <th>Current Semester</th>
+                <th>Applied Date</th>
+                <th>Resume</th>
+                <th>Accept/Reject</th>
             </tr>
         </tfoot>
     </table>
+    <!--<iframe src="<?php //echo $path.$pdf; ?>" width="90%" height="500px"></iframe>-->
           </div>
         </main>
       </div>

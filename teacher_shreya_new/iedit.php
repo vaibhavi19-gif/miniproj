@@ -16,7 +16,7 @@ if(isset($_POST['submit'])){
 
     if($query){
         
-        header("Location: customer.php");
+        header("Location: allinternships.php");
        
     }else{
         echo "<script>alert('Try again')</script>";
