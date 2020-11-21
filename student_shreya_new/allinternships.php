@@ -40,7 +40,7 @@
         <tbody>
 
         <?php 
-           include("../config.php");
+           include("config.php");
            $query = mysqli_query($conn, "select * from all_internships ");
             while($row = mysqli_fetch_array($query)){
 
