@@ -22,25 +22,9 @@
             </div>
           </div>
           
-    <table id="example" class="display" style="width:100%">
-        <thead>
-            <tr>
-            <th>No.</th>
-                <th>Applicant Email Id</th>
-                <th>Internship Title</th>
-                <th>Internship Description</th>
-                <th>Branch From</th>
-                <th>Current Semester</th>
-                <th>Applied Date</th>
-                <th>Resume</th>
-                <th>Accept/Reject</th>
-
-                
-            </tr>
-        </thead>
-        
-        <tbody>
+  <form action="" method="post" style="border: 1px solid purple; width:60%; margin-left: 10%; padding:20px">
         <?php 
+            $id = $_GET["id"];
             $user = $_SESSION['username'];
             include("config.php");
             $query2 = mysqli_query($conn, "select email_id from teachers_signin where username = '$user'");
@@ -51,58 +35,36 @@
                   $app_em = $row['applicant_email'];
                   $query3 = mysqli_query($conn, "SELECT * FROM signin_data WHERE email = '$app_em'");
                   $stud_det = mysqli_fetch_array($query3);
-            
-          ?>    
-              <tr>
-                 <td><?php  echo $row['id'];  ?></td>
-                
-                 <td><?php  echo $row['applicant_email'];  ?></td>
-                 
-                 <td><?php  echo $row['internship_title'];  ?></td>
-                 <td><?php  echo $row['des'];  ?></td>
-                 <td><?php  echo $stud_det['branch'];  ?></td>
-                 <td><?php  echo $row['sem'];  ?></td>
-                 <td><?php  echo $row['date_applied'];  ?></td>
-                 <td><form action="">
-                    <div class="form-group">
-                    <a href="http://localhost/miniproj/resumes/<?php  echo $row['file'];?>">Download</a>
-                    </div>
-                  </form>
-                </td>
-                 
-
-                 <td>
-                    <div class="row">
-                    <div class="btn-group">
-                      
-                      <!--<a onClick="return confirm('Please confirm edition');" href="internshipedit.php?edit=<?php echo $row['id']; ?>" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span></a>-->
-                      <a onClick="return confirm('Please confirm accepting the selected student for this internship...');" href="send_mail.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">ACCEPT</a>
-
-                    </div>
-
                     
-                    
-                    </div>
-                 
-                 </td>
-                 
-              </tr>
+          ?>     <input type="hidden" id="id" name="id" value="<?php echo $id; ?>">
+                   <h1><?php echo strtoupper($row['fname']); ?> <?php echo strtoupper($row['lname']); ?></h1>  <hr> <br>
+
+                        
+
+                         <div class="form-group">
+                         <label for="">TO</label>
+                         <td><input type="email" name="to" id="to" class="form-control" value="<?php echo $row['applicant_email'];  ?>"></td>
+                         </div>
+
+                         <div class="form-group">
+                         <label for="">FROM</label>
+                         <td><input type="email" name="to" id="to" class="form-control" placeholder="Your Email" ></td>
+                         </div>
+
+                         <div class="form-group">
+                         <label for="">BODY</label>
+                         <td><textarea name="body" id="body" class="form-control" cols="30" rows="10"> Dear <?php echo strtoupper($row['fname']); ?><?php echo strtoupper($row['lname']); ?></textarea></td>
+                         </div>
+
+
+
+                         
+      
+
             <?php   }  ?>
-        </tbody>
-        <tfoot>
-            <tr>
-            <th>No.</th>
-                <th>Applicant Email Id</th>
-                <th>Internship Title</th>
-                <th>Internship Description</th>
-                <th>Branch From</th>
-                <th>Current Semester</th>
-                <th>Applied Date</th>
-                <th>Resume</th>
-                <th>Accept/Reject</th>
-            </tr>
-        </tfoot>
-    </table>
+            <input type="submit" style="background-color:purple" class="btn btn-success btn-block" name="submit" id="submit" value="SEND">
+
+            </form>
     <!--<iframe src="<?php //echo $path.$pdf; ?>" width="90%" height="500px"></iframe>-->
           </div>
         </main>
